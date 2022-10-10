@@ -13,6 +13,7 @@ bool is_int_number(const char str[]);
 int  to_int_number(char str[]);
 int power(int a, int b); 
 bool is_bin_number(const char str[]);
+int  bin_to_dec(char str[]);
 
 void main()
 {
@@ -56,6 +57,7 @@ cout << "длина строки: " << strlen(str) << endl;
 //cout << str << endl;
 //cout << to_int_number(str) << endl;
 //cout << (is_bin_number(str) ? "Число двоичное!" : "Не двоичное 100 пудов!") << endl; 
+cout << bin_to_dec(str) << endl; 
 }
 
 int StringLength(const char str[])
@@ -147,8 +149,8 @@ int  to_int_number(char str[])
 		}
 		return result_of_is_num; 
 	}
-	return false; 
 	delete[]buffer; 
+	return false; 
 }
 int power(int a,int b)
 {
@@ -172,4 +174,25 @@ bool is_bin_number(const char str[])
 		else return false; 
 	}
 	return true; 
+}
+int  bin_to_dec(char str[])
+{
+	if (is_bin_number(str))
+	{
+		int* Buffer = new int[strlen(str)]{};
+		for (int i = 0; str[i]; i++)
+		{
+			Buffer[i] = power(2, strlen(str) - i-1) * ((int)str[i] - '0');
+			//cout << Buffer[i] << "\t"; 
+		}
+		//cout << endl; 
+		int result_bin_to_dec = 0; 
+		for (int i = 0; str[i]; i++)
+		{
+			result_bin_to_dec += Buffer[i]; 
+		}
+		return result_bin_to_dec; 
+		delete[]Buffer; 
+	}
+	else return false; 
 }
