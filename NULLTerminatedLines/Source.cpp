@@ -12,6 +12,7 @@ void remove_symbol(char str[], const char symbol);
 bool is_int_number(const char str[]);
 int  to_int_number(char str[]);
 int power(int a, int b); 
+bool is_bin_number(const char str[]);
 
 void main()
 {
@@ -54,6 +55,7 @@ cout << "длина строки: " << strlen(str) << endl;
 //cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
 //cout << str << endl;
 //cout << to_int_number(str) << endl;
+//cout << (is_bin_number(str) ? "Число двоичное!" : "Не двоичное 100 пудов!") << endl; 
 }
 
 int StringLength(const char str[])
@@ -161,4 +163,13 @@ int power(int a,int b)
 		}
 		return result; 
 	}
+}
+bool is_bin_number(const char str[])
+{
+	for (int i = 0; str[i]; i++)
+	{
+		if ((int)str[i] == 48 || (int)str[i] == 49) continue;
+		else return false; 
+	}
+	return true; 
 }
