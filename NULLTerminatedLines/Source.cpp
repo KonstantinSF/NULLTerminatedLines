@@ -32,13 +32,13 @@ for (int i = 0; i < 256; i++)
 #endif // ASCII
 
 const int SIZE = 256;
-char str[SIZE] = "6465546666";
+char str[SIZE] = {};
 //cout << (int)'\0' << endl;
 //cout << (int)'0' << endl;
-//cout << "Введите строку: ";
-////cin >> str;
-//SetConsoleCP(1251);
-////cin.getline(str, SIZE);
+cout << "Введите строку: ";
+cin >> str;
+SetConsoleCP(1251);
+//cin.getline(str, SIZE);
 //SetConsoleCP(866);
 //cout << str << endl;
 //cout << "длина строки: " << StringLength(str) << endl;
@@ -49,9 +49,9 @@ char str[SIZE] = "6465546666";
 //lower_case(str); 
 //cout << str << endl; 
 //shrink(str); 
-//cout << str << endl; 
 //cout << (is_palindrom(str) ? "" : "Не ") << "является палиндромом!" << endl;
-cout << (is_int_number(str) ? "Число десятичное" : " Число не десятичное!") << endl;
+cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
+cout << str << endl;
 }
 
 int StringLength(const char str[])
