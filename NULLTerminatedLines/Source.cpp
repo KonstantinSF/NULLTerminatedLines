@@ -10,6 +10,8 @@ void shrink(char str[]);
 bool is_palindrom(char str[]); 
 void remove_symbol(char str[], const char symbol); 
 bool is_int_number(const char str[]);
+int  to_int_number(char str[]);
+int power(int a, int b); 
 
 void main()
 {
@@ -30,19 +32,18 @@ for (int i = 0; i < 256; i++)
 	cout << (int)i << "\t" << (char)i << endl;
 }
 #endif // ASCII
-
 const int SIZE = 256;
 char str[SIZE] = {};
+SetConsoleCP(1251);
+cout << "Введите строку: ";
+SetConsoleCP(866);
+cin >> str;
 //cout << (int)'\0' << endl;
 //cout << (int)'0' << endl;
-cout << "Введите строку: ";
-cin >> str;
-SetConsoleCP(1251);
 //cin.getline(str, SIZE);
-//SetConsoleCP(866);
 //cout << str << endl;
-//cout << "длина строки: " << StringLength(str) << endl;
-//cout << "длина строки: " << strlen(str) << endl;
+cout << "длина строки: " << StringLength(str) << endl;
+cout << "длина строки: " << strlen(str) << endl;
 //cout << "Длина строки в байтах: " << sizeof(str) << endl;
 //upper_case(str); 
 //cout << str << endl; 
@@ -50,8 +51,9 @@ SetConsoleCP(1251);
 //cout << str << endl; 
 //shrink(str); 
 //cout << (is_palindrom(str) ? "" : "Не ") << "является палиндромом!" << endl;
-cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
-cout << str << endl;
+//cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
+//cout << str << endl;
+//cout << to_int_number(str) << endl;
 }
 
 int StringLength(const char str[])
@@ -125,4 +127,38 @@ bool is_int_number(const char str[])
 		else return false; 
 	}
 	return true; 
+}
+int  to_int_number(char str[])
+{ 
+	int* buffer = new int[strlen(str)]{};
+	if (is_int_number(str))
+	{
+		for (int i = 0; str[i]; i++)
+		{
+			buffer[i] = (int)str[i] - '0';//changing char to int and recording to array
+			//cout << buffer[i] << "\t"; 
+		}
+		int result_of_is_num = 0; //var for result number
+		for (int i = 0; i < strlen(str); i++)
+		{
+			result_of_is_num += buffer[i] * power(10, strlen(str) - (i+1)); 
+		}
+		return result_of_is_num; 
+	}
+	return false; 
+	delete[]buffer; 
+}
+int power(int a,int b)
+{
+	if (b == 0)return 1;
+	else if (b == 1)return a;
+	else
+	{
+		int result = a;
+		while (b > 1)
+		{
+			result *= a; b--;
+		}
+		return result; 
+	}
 }
