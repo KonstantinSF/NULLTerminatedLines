@@ -14,6 +14,7 @@ int  to_int_number(char str[]);
 int power(int a, int b); 
 bool is_bin_number(const char str[]);
 int  bin_to_dec(char str[]);
+bool is_hex_number(char str[]);
 
 void main()
 {
@@ -28,7 +29,7 @@ cout << str << endl;
 cout << typeid(str).name() << endl;
 cout << typeid("Hello").name() << endl;
 #endif // EXAMPLE_1
-#if ASCII
+#ifdef ASCII
 for (int i = 0; i < 256; i++)
 {
 	cout << (int)i << "\t" << (char)i << endl;
@@ -44,20 +45,21 @@ cin >> str;
 //cout << (int)'0' << endl;
 //cin.getline(str, SIZE);
 //cout << str << endl;
-cout << "длина строки: " << StringLength(str) << endl;
-cout << "длина строки: " << strlen(str) << endl;
+//cout << "длина строки: " << StringLength(str) << endl;
+//cout << "длина строки: " << strlen(str) << endl;
 //cout << "Длина строки в байтах: " << sizeof(str) << endl;
 //upper_case(str); 
 //cout << str << endl; 
 //lower_case(str); 
-//cout << str << endl; 
 //shrink(str); 
 //cout << (is_palindrom(str) ? "" : "Не ") << "является палиндромом!" << endl;
 //cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
 //cout << str << endl;
 //cout << to_int_number(str) << endl;
 //cout << (is_bin_number(str) ? "Число двоичное!" : "Не двоичное 100 пудов!") << endl; 
-cout << bin_to_dec(str) << endl; 
+//cout << bin_to_dec(str) << endl; 
+cout << (is_hex_number(str)? "Is HEX number": "Is not HEX number") << endl;
+cout << str << endl; 
 }
 
 int StringLength(const char str[])
@@ -195,4 +197,13 @@ int  bin_to_dec(char str[])
 		delete[]Buffer; 
 	}
 	else return false; 
+}
+bool is_hex_number(char str[])
+{
+	for (int i=0; str[i]; i++)
+	{
+		if ((int)str[i] == 48 || (int)str[i] == 49 || (int)str[i] == 50 || (int)str[i] == 51 || (int)str[i] == 52 || (int)str[i] == 53 || (int)str[i] == 54 || (int)str[i] == 55 || (int)str[i] == 56 || (int)str[i] == 57 || (int)str[i] == 97 || (int)str[i] == 98 || (int)str[i] == 99 || (int)str[i] == 100 || (int)str[i] == 101 || (int)str[i] == 102)continue;
+		else return false;
+	}
+	return true; 
 }
