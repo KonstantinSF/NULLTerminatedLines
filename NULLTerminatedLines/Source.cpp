@@ -1,17 +1,18 @@
 ﻿#include <iostream>
 #include <Windows.h>
-using namespace std; 
+using namespace std;
+#define EXAMPLE_1
 //#define ASCII
 
 int StringLength(const char str[]);
-void upper_case(char str[]); 
-void lower_case(char str[]); 
-void shrink(char str[]); 
-bool is_palindrom(char str[]); 
-void remove_symbol(char str[], const char symbol); 
+void upper_case(char str[]);
+void lower_case(char str[]);
+void shrink(char str[]); //удаляет лишние пробелы
+bool is_palindrom(char str[]);
+void remove_symbol(char str[], const char symbol);
 bool is_int_number(const char str[]);
 int  to_int_number(char str[]);
-int power(int a, int b); 
+int power(int a, int b);
 bool is_bin_number(const char str[]);
 int  bin_to_dec(char str[]);
 bool is_hex_number(char str[]);
@@ -36,19 +37,20 @@ void main()
 		cout << (int)i << "\t" << (char)i << endl;
 	}
 #endif // ASCII
-	const int SIZE = 256;
+	/*const int SIZE = 256;
 	char str[SIZE] = {};
 	SetConsoleCP(1251);
 	cout << "Введите строку: ";
 	SetConsoleCP(866);
 	cin >> str;
-	//cout << (int)'\0' << endl;
-	//cout << (int)'0' << endl;
-	//cin.getline(str, SIZE);
-	//cout << str << endl;
-	//cout << "длина строки: " << StringLength(str) << endl;
-	//cout << "длина строки: " << strlen(str) << endl;
-	//cout << "Длина строки в байтах: " << sizeof(str) << endl;
+	cout << (int)'\0' << endl;
+	cout << (int)'0' << endl;
+	cin.getline(str, SIZE);
+	cout << str << endl;
+	cout << "длина строки: " << StringLength(str) << endl;
+	cout << "длина строки: " << strlen(str) << endl;
+	cout << "Длина строки в байтах: " << sizeof(str) << endl;*/
+
 	//upper_case(str); 
 	//cout << str << endl; 
 	//lower_case(str); 
@@ -65,9 +67,9 @@ void main()
 
 int StringLength(const char str[])
 {
-	int i = 0; 
+	int i = 0;
 	for (; str[i]; i++);
-	return i; 
+	return i;
 }
 void upper_case(char str[])
 {
@@ -75,14 +77,14 @@ void upper_case(char str[])
 	{
 		/*if (str[i] >= 'a' && str[i] <= 'z') str[i] -= ' ';
 		if (str[i] >= 'а' && str[i] <= 'я') str[i] -= ' ';*/
-		str[i] = toupper(str[i]); 
+		str[i] = toupper(str[i]);
 	}
 }
 void lower_case(char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		str[i] = tolower(str[i]); 
+		str[i] = tolower(str[i]);
 	}
 }
 void shrink(char str[])
@@ -93,7 +95,7 @@ void shrink(char str[])
 		{
 			for (int j = i + 1; str[j]; j++)
 			{
-				str[j] = str[j + 1]; 
+				str[j] = str[j + 1];
 			}
 		}
 	}
@@ -110,11 +112,11 @@ void remove_symbol(char str[], const char symbol)
 }
 bool is_palindrom(char str[])
 {
-	char* buffer = new char[strlen(str) + 1]{}; 
+	char* buffer = new char[strlen(str) + 1]{};
 	strcpy(buffer, str); //копируем строку в буфер
-	lower_case(buffer); 
-	remove_symbol(buffer, ' '); 
-	int size = strlen(buffer); 
+	lower_case(buffer);
+	remove_symbol(buffer, ' ');
+	int size = strlen(buffer);
 	for (int i = 0; i < size; i++)
 	{
 		if (buffer[i] != buffer[size - 1 - i])
@@ -124,19 +126,22 @@ bool is_palindrom(char str[])
 		}
 		return true;
 	}
-	delete[] buffer; 
+	delete[] buffer;
 }
 bool is_int_number(const char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		if ((int)str[i] == 48 || (int)str[i] == 49 || (int)str[i] == 50 || (int)str[i] == 51 || (int)str[i] == 52 || (int)str[i] == 53 || (int)str[i] == 54 || (int)str[i] == 55 || (int)str[i] == 56 || (int)str[i] == 57)continue;
-		else return false; 
+		//if ((int)str[i] == 48 || (int)str[i] == 49 || (int)str[i] == 50 || (int)str[i] == 51 || (int)str[i] == 52 || (int)str[i] == 53 || (int)str[i] == 54 || (int)str[i] == 55 || (int)str[i] == 56 || (int)str[i] == 57)continue;
+		/*if (str[i]>='0' && str[i]<='9')continue;
+		else return false;*/
+		if (!(str[i] >= '0' && str[i] <= '9'))return false;
+		//if (str[i] < '0' || str[i]>'9')return false;
 	}
-	return true; 
+	return true;
 }
 int  to_int_number(char str[])
-{ 
+{
 	int* buffer = new int[strlen(str)]{};
 	if (is_int_number(str))
 	{
@@ -148,14 +153,15 @@ int  to_int_number(char str[])
 		int result_of_is_num = 0; //var for result number
 		for (int i = 0; i < strlen(str); i++)
 		{
-			result_of_is_num += buffer[i] * power(10, strlen(str) - (i+1)); 
+			result_of_is_num += buffer[i] * power(10, strlen(str) - (i + 1));
 		}
-		return result_of_is_num; 
+		delete[] buffer;
+		return result_of_is_num;
 	}
-	delete[]buffer; 
-	return false; 
+	delete[]buffer;
+	return false;
 }
-int power(int a,int b)
+int power(int a, int b)
 {
 	if (b == 0)return 1;
 	else if (b == 1)return a;
@@ -166,17 +172,18 @@ int power(int a,int b)
 		{
 			result *= a; b--;
 		}
-		return result; 
+		return result;
 	}
 }
 bool is_bin_number(const char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		if ((int)str[i] == 48 || (int)str[i] == 49) continue;
-		else return false; 
+		/*if (str[i] == 48 || str[i] == 49) continue;
+		else return false;*/
+		if (str[i] != '0' && str[i] != '1')return false;
 	}
-	return true; 
+	return true;
 }
 int  bin_to_dec(char str[])
 {
@@ -185,25 +192,48 @@ int  bin_to_dec(char str[])
 		int* Buffer = new int[strlen(str)]{};
 		for (int i = 0; str[i]; i++)
 		{
-			Buffer[i] = power(2, strlen(str) - i-1) * ((int)str[i] - '0');
+			Buffer[i] = power(2, strlen(str) - i - 1) * ((int)str[i] - '0');
 			//cout << Buffer[i] << "\t"; 
 		}
 		//cout << endl; 
-		int result_bin_to_dec = 0; 
+		int result_bin_to_dec = 0;
 		for (int i = 0; str[i]; i++)
 		{
-			result_bin_to_dec += Buffer[i]; 
+			result_bin_to_dec += Buffer[i];
 		}
-		return result_bin_to_dec; 
-		delete[]Buffer; 
+		return result_bin_to_dec;
+		delete[]Buffer;
 	}
-	else return false; 
+	else return false;
 }
 bool is_hex_number(char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		if ((int)str[i] == 48 || (int)str[i] == 49 || (int)str[i] == 50 || (int)str[i] == 51 || (int)str[i] == 52 || (int)str[i] == 53 || (int)str[i] == 54 || (int)str[i] == 55 || (int)str[i] == 56 || (int)str[i] == 57 || (int)str[i] == 97 || (int)str[i] == 98 || (int)str[i] == 99 || (int)str[i] == 100 || (int)str[i] == 101 || (int)str[i] == 102)continue;
+		if (
+			str[i] == 48 || 
+			str[i] == 49 || 
+			str[i] == 50 || 
+			str[i] == 51 || 
+			str[i] == 52 || 
+			str[i] == 53 || 
+			str[i] == 54 || 
+			str[i] == 55 || 
+			str[i] == 56 || 
+			str[i] == 57 || 
+			str[i] == 'A' || 
+			str[i] == 'B' || 
+			str[i] == 'C' || 
+			str[i] == 'D' || 
+			str[i] == 'E' || 
+			str[i] == 'F' ||
+			str[i] == 'a' || 
+			str[i] == 'b' || 
+			str[i] == 'c' || 
+			str[i] == 'd' || 
+			str[i] == 'e' || 
+			str[i] == 'f'
+			)continue;
 		else return false;
 	}
 	return true;
@@ -240,9 +270,9 @@ int hex_to_dec(char str[])
 			result_hex_to_dec += Buffer[i];
 		}
 		return result_hex_to_dec;
-	delete[]Buffer;
+		delete[]Buffer;
 	}
-	else return false; 
+	else return false;
 	/*cout << result_hex_to_dec << endl;
 	for (int i = 0; i<size; i++)
 	{
