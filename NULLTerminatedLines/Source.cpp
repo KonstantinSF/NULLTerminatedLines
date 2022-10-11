@@ -15,51 +15,52 @@ int power(int a, int b);
 bool is_bin_number(const char str[]);
 int  bin_to_dec(char str[]);
 bool is_hex_number(char str[]);
+int  hex_to_dec(char str[]);
 
 void main()
 {
-setlocale (LC_ALL, ""); 
+	setlocale(LC_ALL, "");
 #ifdef EXAMPLE_1
-//ASCII-символ с кодом 0 - '\0'
-//char str[] = { 'H', 'e', 'l', 'l', 'o', 0 };
-char str[] = "Hello";
-//str[]   - строковая переменная
-//"Hello" - строковая константа
-cout << str << endl;
-cout << typeid(str).name() << endl;
-cout << typeid("Hello").name() << endl;
+	//ASCII-символ с кодом 0 - '\0'
+	//char str[] = { 'H', 'e', 'l', 'l', 'o', 0 };
+	char str[] = "Hello";
+	//str[]   - строковая переменная
+	//"Hello" - строковая константа
+	cout << str << endl;
+	cout << typeid(str).name() << endl;
+	cout << typeid("Hello").name() << endl;
 #endif // EXAMPLE_1
 #ifdef ASCII
-for (int i = 0; i < 256; i++)
-{
-	cout << (int)i << "\t" << (char)i << endl;
-}
+	for (int i = 0; i < 256; i++)
+	{
+		cout << (int)i << "\t" << (char)i << endl;
+	}
 #endif // ASCII
-const int SIZE = 256;
-char str[SIZE] = {};
-SetConsoleCP(1251);
-cout << "Введите строку: ";
-SetConsoleCP(866);
-cin >> str;
-//cout << (int)'\0' << endl;
-//cout << (int)'0' << endl;
-//cin.getline(str, SIZE);
-//cout << str << endl;
-//cout << "длина строки: " << StringLength(str) << endl;
-//cout << "длина строки: " << strlen(str) << endl;
-//cout << "Длина строки в байтах: " << sizeof(str) << endl;
-//upper_case(str); 
-//cout << str << endl; 
-//lower_case(str); 
-//shrink(str); 
-//cout << (is_palindrom(str) ? "" : "Не ") << "является палиндромом!" << endl;
-//cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
-//cout << str << endl;
-//cout << to_int_number(str) << endl;
-//cout << (is_bin_number(str) ? "Число двоичное!" : "Не двоичное 100 пудов!") << endl; 
-//cout << bin_to_dec(str) << endl; 
-cout << (is_hex_number(str)? "Is HEX number": "Is not HEX number") << endl;
-cout << str << endl; 
+	const int SIZE = 256;
+	char str[SIZE] = {};
+	SetConsoleCP(1251);
+	cout << "Введите строку: ";
+	SetConsoleCP(866);
+	cin >> str;
+	//cout << (int)'\0' << endl;
+	//cout << (int)'0' << endl;
+	//cin.getline(str, SIZE);
+	//cout << str << endl;
+	//cout << "длина строки: " << StringLength(str) << endl;
+	//cout << "длина строки: " << strlen(str) << endl;
+	//cout << "Длина строки в байтах: " << sizeof(str) << endl;
+	//upper_case(str); 
+	//cout << str << endl; 
+	//lower_case(str); 
+	//shrink(str); 
+	//cout << (is_palindrom(str) ? "" : "Не ") << "является палиндромом!" << endl;
+	//cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
+	//cout << str << endl;
+	//cout << to_int_number(str) << endl;
+	//cout << (is_bin_number(str) ? "Число двоичное!" : "Не двоичное 100 пудов!") << endl; 
+	//cout << bin_to_dec(str) << endl; 
+	//cout << (is_hex_number(str)? "Is HEX number": "Is not HEX number") << endl;
+	//cout << hex_to_dec(str) << endl; 
 }
 
 int StringLength(const char str[])
@@ -200,10 +201,51 @@ int  bin_to_dec(char str[])
 }
 bool is_hex_number(char str[])
 {
-	for (int i=0; str[i]; i++)
+	for (int i = 0; str[i]; i++)
 	{
 		if ((int)str[i] == 48 || (int)str[i] == 49 || (int)str[i] == 50 || (int)str[i] == 51 || (int)str[i] == 52 || (int)str[i] == 53 || (int)str[i] == 54 || (int)str[i] == 55 || (int)str[i] == 56 || (int)str[i] == 57 || (int)str[i] == 97 || (int)str[i] == 98 || (int)str[i] == 99 || (int)str[i] == 100 || (int)str[i] == 101 || (int)str[i] == 102)continue;
 		else return false;
 	}
-	return true; 
+	return true;
+}
+int hex_to_dec(char str[])
+{
+	if (is_hex_number)
+	{
+		int size = strlen(str);
+		//cout << size << endl;
+		char buf[256] = {};
+		strcpy(buf, str);//copy to str buf
+		//cout << buf << endl;
+		lower_case(buf);//to lower case
+		//cout << buf << endl;
+		int* Buffer = new int[size] {};
+		int result_hex_to_dec = 0;
+		for (int i = 0; buf[i]; i++)//Num to the Buffer
+		{
+			if (buf[i] == 97)Buffer[i] = 10;
+			else if (buf[i] == 98)Buffer[i] = 11;
+			else if (buf[i] == 99)Buffer[i] = 12;
+			else if (buf[i] == 100)Buffer[i] = 13;
+			else if (buf[i] == 101)Buffer[i] = 14;
+			else if (buf[i] == 102)Buffer[i] = 15;
+			else Buffer[i] = buf[i] - '0';//change ASCII to num
+		}
+		for (int i = 0; i < size; i++)
+		{
+			Buffer[i] *= power(16, size - i - 1);//умножаем рязряды числа на 16 в степ от 0 с конца числа
+		}
+		for (int i = 0; i < size; i++)//суммируем в результат
+		{
+			result_hex_to_dec += Buffer[i];
+		}
+		return result_hex_to_dec;
+	delete[]Buffer;
+	}
+	else return false; 
+	/*cout << result_hex_to_dec << endl;
+	for (int i = 0; i<size; i++)
+	{
+		cout << Buffer[i] << "\t";
+	}*/
 }
