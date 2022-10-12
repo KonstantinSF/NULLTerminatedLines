@@ -24,12 +24,12 @@ void main()
 #ifdef EXAMPLE_1
 	//ASCII-символ с кодом 0 - '\0'
 	//char str[] = { 'H', 'e', 'l', 'l', 'o', 0 };
-	char str[] = "Hello";
+	//char str[] = "Hello";
 	//str[]   - строковая переменная
 	//"Hello" - строковая константа
-	cout << str << endl;
+	/*cout << str << endl;
 	cout << typeid(str).name() << endl;
-	cout << typeid("Hello").name() << endl;
+	cout << typeid("Hello").name() << endl;*/
 #endif // EXAMPLE_1
 #ifdef ASCII
 	for (int i = 0; i < 256; i++)
@@ -37,17 +37,17 @@ void main()
 		cout << (int)i << "\t" << (char)i << endl;
 	}
 #endif // ASCII
-	/*const int SIZE = 256;
+	const int SIZE = 256;
 	char str[SIZE] = {};
 	SetConsoleCP(1251);
 	cout << "Введите строку: ";
 	SetConsoleCP(866);
 	cin >> str;
-	cout << (int)'\0' << endl;
-	cout << (int)'0' << endl;
-	cin.getline(str, SIZE);
+	/*cout << (int)'\0' << endl;
+	cout << (int)'0' << endl;*/
+	//cin.getline(str, SIZE);
 	cout << str << endl;
-	cout << "длина строки: " << StringLength(str) << endl;
+	/*cout << "длина строки: " << StringLength(str) << endl;
 	cout << "длина строки: " << strlen(str) << endl;
 	cout << "Длина строки в байтах: " << sizeof(str) << endl;*/
 
@@ -58,7 +58,7 @@ void main()
 	//cout << (is_palindrom(str) ? "" : "Не ") << "является палиндромом!" << endl;
 	//cout << (is_int_number(str) ? "Число десятичное)" : "Число не десятичное!") << endl;
 	//cout << str << endl;
-	//cout << to_int_number(str) << endl;
+	cout << to_int_number(str) << endl;
 	//cout << (is_bin_number(str) ? "Число двоичное!" : "Не двоичное 100 пудов!") << endl; 
 	//cout << bin_to_dec(str) << endl; 
 	//cout << (is_hex_number(str)? "Is HEX number": "Is not HEX number") << endl;
@@ -147,7 +147,7 @@ int  to_int_number(char str[])
 	{
 		for (int i = 0; str[i]; i++)
 		{
-			buffer[i] = (int)str[i] - '0';//changing char to int and recording to array
+			buffer[i] = str[i] - '0';//changing char to int and recording to array
 			//cout << buffer[i] << "\t"; 
 		}
 		int result_of_is_num = 0; //var for result number
